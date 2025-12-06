@@ -211,6 +211,7 @@ const swaggerDocs = (app) => {
         tagsSorter: "default",
         operationsSorter: "method",
         deepLinking: true,
+        showResponseHeaders: false,
       },
     })
   );

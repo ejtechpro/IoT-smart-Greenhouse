@@ -36,12 +36,90 @@
  *           schema:
  *             type: object
  *             description: Device data
+ *             required:
+ *               - greenhouseId
+ *               - deviceType
+ *               - deviceName
+ *               - deviceId
+ *             properties:
+ *               greenhouseId:
+ *                 type: string
+ *                 example: greenhouse-001
+ *               deviceType:
+ *                 type: string
+ *                 enum: ['FAN', 'WATER_PUMP', 'WATER_VALVE', 'HEATER', 'LED_LIGHT', 'COOLING_SYSTEM', 'irrigation', 'ventilation', 'SERVO', 'WINDOW']
+ *                 example: FAN
+ *               deviceName:
+ *                 type: string
+ *                 example: Main Fan
+ *               deviceId:
+ *                 type: string
+ *                 example: fan-001
+ *               status:
+ *                 type: string
+ *                 enum: ['ON', 'OFF', 'AUTO', 'OPEN', 'CLOSED']
+ *                 default: OFF
+ *               intensity:
+ *                 type: number
+ *                 minimum: 0
+ *                 maximum: 100
+ *                 default: 0
+ *                 example: 75
+ *               autoMode:
+ *                 type: boolean
+ *                 default: false
+ *               lastActivated:
+ *                 type: string
+ *                 format: date-time
+ *                 example: 2025-12-06T10:00:00Z
+ *               powerConsumption:
+ *                 type: number
+ *                 example: 150
+ *               location:
+ *                 type: string
+ *                 example: Main Greenhouse
+ *               automationRules:
+ *                 type: object
+ *                 properties:
+ *                   temperatureHigh:
+ *                     type: number
+ *                     example: 35
+ *                   temperatureLow:
+ *                     type: number
+ *                     example: 18
+ *                   humidityHigh:
+ *                     type: number
+ *                     example: 90
+ *                   humidityLow:
+ *                     type: number
+ *                     example: 40
+ *                   soilMoistureLow:
+ *                     type: number
+ *                     example: 20
+ *                   lightLevelLow:
+ *                     type: number
+ *                     example: 200
  *     responses:
  *       201:
  *         description: Device created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/DeviceControl'
  *       500:
  *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
  */
+
 
 /**
  * @openapi
