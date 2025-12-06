@@ -29,12 +29,12 @@ ESP32 devices can send data to:
 
     servers: [
       {
-        url: process.env.API_URL || "http://localhost:5000",
-        description: "Development Server",
-      },
-      {
         url: "https://api-smart-greenhouse.onrender.com",
         description: "Production (Render)",
+      },
+      {
+        url: "http://localhost:5000",
+        description: "Development Server",
       },
     ],
     tags: [
