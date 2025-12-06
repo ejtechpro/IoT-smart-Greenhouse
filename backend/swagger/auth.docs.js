@@ -83,11 +83,11 @@
  *             properties:
  *               username:
  *                 type: string
- *                 example: johndoe
+ *                 example: admin
  *               email:
  *                 type: string
  *                 format: email
- *                 example: johndoe@example.com
+ *                 example: admin@local.com
  *               preferences:
  *                 type: object
  *                 properties:
