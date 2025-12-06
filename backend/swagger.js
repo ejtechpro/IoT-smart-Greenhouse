@@ -25,10 +25,8 @@ The system uses Socket.IO for real-time communication. Connect to \`/socket.io\`
 ESP32 devices can send data to:
 - \`POST /api/iot\` - Main sensor data endpoint
 - \`POST /api/iot/device-status\` - Device status updates`,
-      
-      
     },
-   
+
     servers: [
       {
         url: process.env.API_URL || "http://localhost:5000",
@@ -40,19 +38,19 @@ ESP32 devices can send data to:
       },
     ],
     tags: [
-       {
+      {
         name: "Root",
         description: "Root endpoints and API information",
       },
-       {
+      {
         name: "Health",
         description: "Health check and monitoring",
       },
-       {
+      {
         name: "Test",
         description: "Testing and debugging endpoints",
       },
-     
+
       {
         name: "Auth",
         description: "Authentication and user management",
@@ -77,7 +75,6 @@ ESP32 devices can send data to:
         name: "Settings",
         description: "User settings and configuration",
       },
-     
     ],
     components: {
       securitySchemes: {
@@ -183,8 +180,8 @@ ESP32 devices can send data to:
   },
   apis: [
     //"./routes/*.js",           // Route files
-    "./swagger/*.js",          // Separate documentation files
-    "./models/*.js",           // Model schemas (if you add JSDoc to models)
+    "./swagger/*.js", // Separate documentation files
+    "./models/*.js", // Model schemas (if you add JSDoc to models)
   ],
 };
 
@@ -192,32 +189,36 @@ const swaggerSpec = swaggerJsDoc(options);
 
 const swaggerDocs = (app) => {
   // Swagger UI endpoint
-  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-    explorer: true,
-    customCss: `
+  app.use(
+    "/docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      explorer: true,
+      customCss: `
       .swagger-ui .topbar { display: none }
       .swagger-ui { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; }
       .info { margin: 20px 0; }
     `,
-    customSiteTitle: "IoT Smart Greenhouse API",
-    swaggerOptions: {
-      persistAuthorization: true,
-      displayRequestDuration: true,
-      defaultModelsExpandDepth: 2,
-      defaultModelExpandDepth: 2,
-      docExpansion: "list",
-      filter: true,
-      tagsSorter: "default",
-      operationsSorter: "method",
-    },
-  }));
+      customSiteTitle: "IoT Smart Greenhouse API",
+      swaggerOptions: {
+        persistAuthorization: true,
+        displayRequestDuration: true,
+        defaultModelsExpandDepth: 2,
+        defaultModelExpandDepth: 2,
+        docExpansion: "none",
+        filter: true,
+        tagsSorter: "default",
+        operationsSorter: "method",
+        deepLinking: true,
+      },
+    })
+  );
 
   // JSON endpoint for programmatic access
   app.get("/docs.json", (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.send(swaggerSpec);
   });
-
 };
 
 module.exports = swaggerDocs;

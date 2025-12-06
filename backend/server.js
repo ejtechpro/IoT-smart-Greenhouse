@@ -24,6 +24,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://localhost:3000",
   "http://localhost:5172",
+  "https://api-smart-greenhouse.onrender.com",
 ];
 
 // Add environment-specific origins
