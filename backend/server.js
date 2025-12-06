@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const http = require("http");
 const socketIo = require("socket.io");
+const swaggerDocs = require("./swagger");
 require("dotenv").config();
 
 // Import routes
@@ -19,7 +20,11 @@ const setupRoutes = require("./routes/setupRoutes");
 const app = express();
 const server = http.createServer(app);
 // CORS origins - including live Vercel domain
-const allowedOrigins = ["http://localhost:3000", "https://localhost:3000"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://localhost:3000",
+  "http://localhost:5172",
+];
 
 // Add environment-specific origins
 if (process.env.FRONTEND_URL) {
@@ -336,6 +341,8 @@ app.post("/api/test-post", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+swaggerDocs(app);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
