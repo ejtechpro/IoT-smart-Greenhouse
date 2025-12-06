@@ -82,7 +82,8 @@ ESP32 devices can send data to:
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
-          description: `Enter JWT <b>token</b> in format: Bearer \`<token>\``,
+          description:
+            "Enter your JWT token **without** the `Bearer` prefix.`Bearer` will be added automatically.",
         },
       },
       responses: {
