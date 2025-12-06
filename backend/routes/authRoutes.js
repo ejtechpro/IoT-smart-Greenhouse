@@ -10,23 +10,18 @@ router.post('/register', validateRegister, async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
     
-    console.log('Registration attempt:', { username, email, role });
-    
     // Check if user already exists with timeout
     const existingUser = await User.findOne({
       $or: [{ email }, { username }]
     }).maxTimeMS(20000); // 20 second timeout
     
     if (existingUser) {
-      console.log('User already exists:', existingUser.email);
       return res.status(400).json({
         success: false,
         message: 'User with this email or username already exists'
       });
     }
-    
-    console.log('Creating new user...');
-    
+        
     // Create new user
     const user = new User({
       username,
@@ -39,9 +34,7 @@ router.post('/register', validateRegister, async (req, res) => {
       }]
     });
     
-    console.log('Saving user to database...');
     await user.save();
-    console.log('User saved successfully:', user._id);
     
     // Generate JWT token
     const token = jwt.sign(
@@ -50,7 +43,6 @@ router.post('/register', validateRegister, async (req, res) => {
       { expiresIn: process.env.JWT_EXPIRE }
     );
     
-    console.log('Registration successful for user:', user.username);
     
     res.status(201).json({
       success: true,
@@ -65,7 +57,6 @@ router.post('/register', validateRegister, async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Registration error:', error);
     
     // Handle specific MongoDB errors
     if (error.name === 'MongoTimeoutError' || error.code === 'ENOTFOUND') {
@@ -160,7 +151,6 @@ router.post('/login', validateLogin, async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to login',
