@@ -1,5 +1,13 @@
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const m2s = require("mongoose-to-swagger");
+const User = require("./models/User");
+const Alert = require("./models/Alert");
+const DeviceControl = require("./models/DeviceControl");
+const DeviceControlLog = require("./models/DeviceControlLog");
+const Settings = require("./models/Settings");
+const SensorData = require("./models/SensorData");
+
 require("dotenv").config();
 
 const options = {
@@ -155,22 +163,12 @@ ESP32 devices can send data to:
         },
       },
       schemas: {
-        Error: {
-          type: "object",
-          properties: {
-            success: {
-              type: "boolean",
-              example: false,
-            },
-            message: {
-              type: "string",
-            },
-            error: {
-              type: "string",
-              description: "Detailed error (development only)",
-            },
-          },
-        },
+         User: m2s(User),
+         DeviceControl: m2s(DeviceControl),
+         SensorData: m2s(SensorData),
+         Settings: m2s(Settings),
+         DeviceControlLog: m2s(DeviceControlLog),
+         Alert: m2s(Alert),
       },
     },
     security: [
