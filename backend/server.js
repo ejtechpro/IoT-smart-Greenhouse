@@ -124,6 +124,7 @@ mongoose.set("bufferCommands", false);
 
 // Add debug logging
 console.log("Attempting to connect to MongoDB...");
+
 console.log(
   "MongoDB URI:",
   process.env.MONGODB_URI ? "URI loaded" : "URI not found"

@@ -32,7 +32,7 @@ ESP32 devices can send data to:
     servers: [
       {
         url: process.env.API_URL || "http://localhost:5000",
-        description: process.env.NODE_ENV === "production" ? "Production Server" : "Development Server",
+        description: "Development Server",
       },
       {
         url: "https://api-smart-greenhouse.onrender.com",
@@ -40,6 +40,19 @@ ESP32 devices can send data to:
       },
     ],
     tags: [
+       {
+        name: "Root",
+        description: "Root endpoints and API information",
+      },
+       {
+        name: "Health",
+        description: "Health check and monitoring",
+      },
+       {
+        name: "Test",
+        description: "Testing and debugging endpoints",
+      },
+     
       {
         name: "Auth",
         description: "Authentication and user management",
@@ -64,18 +77,7 @@ ESP32 devices can send data to:
         name: "Settings",
         description: "User settings and configuration",
       },
-      {
-        name: "Setup",
-        description: "System setup and initialization",
-      },
-      {
-        name: "Health",
-        description: "Health check and monitoring",
-      },
-      {
-        name: "Root",
-        description: "Root endpoints and API information",
-      },
+     
     ],
     components: {
       securitySchemes: {
@@ -83,7 +85,7 @@ ESP32 devices can send data to:
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
-          description: "Enter JWT token in format: Bearer <token>",
+          description: `Enter JWT <b>token</b> in format: Bearer \`<token>\``,
         },
       },
       responses: {
@@ -180,7 +182,7 @@ ESP32 devices can send data to:
     ],
   },
   apis: [
-    "./routes/*.js",           // Route files
+    //"./routes/*.js",           // Route files
     "./swagger/*.js",          // Separate documentation files
     "./models/*.js",           // Model schemas (if you add JSDoc to models)
   ],
@@ -205,8 +207,8 @@ const swaggerDocs = (app) => {
       defaultModelExpandDepth: 2,
       docExpansion: "list",
       filter: true,
-      tagsSorter: "alpha",
-      operationsSorter: "alpha",
+      tagsSorter: "default",
+      operationsSorter: "method",
     },
   }));
 
@@ -216,8 +218,6 @@ const swaggerDocs = (app) => {
     res.send(swaggerSpec);
   });
 
-  console.log(`📚 Swagger documentation available at /docs`);
-  console.log(`📄 Swagger JSON available at /docs.json`);
 };
 
 module.exports = swaggerDocs;
