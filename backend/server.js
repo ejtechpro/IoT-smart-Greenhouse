@@ -25,6 +25,7 @@ const allowedOrigins = [
   "https://localhost:3000",
   "http://localhost:5172",
   "https://api-smart-greenhouse.onrender.com",
+  "https://iot-smart-greenhouse.vercel.app",
 ];
 
 // Add environment-specific origins

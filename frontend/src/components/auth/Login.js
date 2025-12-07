@@ -182,7 +182,7 @@ const Login = () => {
             <p className="text-xs text-gray-600 text-center mb-2">Demo Credentials:</p>
             <p className="text-xs text-gray-500 text-center">
               Username: <span className="font-mono">admin</span> | 
-              Password: <span className="font-mono">admin123</span>
+              Password: <span className="font-mono">admin1234</span>
             </p>
           </div>
         </div>
