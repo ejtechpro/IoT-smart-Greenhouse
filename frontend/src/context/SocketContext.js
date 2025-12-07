@@ -89,9 +89,9 @@ export const SocketProvider = ({ children }) => {
       console.log('🔌 Creating socket connection for user:', user.username);
       
       // Use the same host as the current page to avoid CORS issues
-      const host = window.location.hostname === 'localhost' 
+      const host = window.location.hostname === 'localhos' 
         ? 'http://localhost:5000'
-        : 'https://open-lauryn-ina-9662925b.koyeb.app';
+        : 'https://api-smart-greenhouse.onrender.com';
       
       const newSocket = io(host, {
         auth: {
